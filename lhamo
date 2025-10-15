@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Lhamo 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ffd6e8, #ffeaf5);
+    color: #444;
+    overflow: hidden;
+  }
+  .slide {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    text-align: center;
+    transition: all 1s ease;
+  }
+  .active { display: flex; }
+  button {
+    background-color: #ff9acb;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1rem;
+    transition: 0.3s;
+  }
+  button:hover { background-color: #ff80b5; }
+  .floating-heart {
+    position: absolute;
+    color: #ff80b5;
+    animation: floatUp 4s linear infinite;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-100vh); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<div id="slide1" class="slide active">
+  <h2>Loading something special for you… 💖</h2>
+</div>
+
+<div id="slide2" class="slide">
+  <h1>Hey Lhamo! 👋</h1>
+  <p>I have something to show you, but first... a quick question 👀</p>
+  <button onclick="nextSlide(3)">👉 Okay, I'm listening</button>
+</div>
+
+<div id="slide3" class="slide">
+  <h2>Sooo... do you like me? 😳💞</h2>
+  <div>
+    <button id="yesBtn" onclick="nextSlide(4)">✅ Yes, of course!</button>
+    <button id="noBtn" onmouseover="moveButton()" onclick="confirmNo()">❌ Nope</button>
+  </div>
+</div>
+
+<div id="slide4" class="slide">
+  <h2>Hehe I knew it 😌💗</h2>
+  <p>You just made my day, Lhamo!</p>
+  <button onclick="nextSlide(5)">💌 Continue</button>
+</div>
+
+<div id="slide5" class="slide">
+  <h2>Do you like surprises? 🎁</h2>
+  <p>I made this little page just to say...</p>
+  <p>You’re one of the sweetest people I’ve met❤️</p>
+  <div>
+    <button onclick="restart()">🫶 Restart</button>
+    <button onclick="endConfession()">💖 End</button>
+  </div>
+</div>
+
+<div id="error404" class="slide">
+  <h1>Error 404: Wrong answer 😝</h1>
+  <p>Try refreshing your heart... not the page 💕</p>
+  <button onclick="nextSlide(3)">Go Back 💘</button>
+</div>
+
+<script>
+let currentSlide = 1;
+function nextSlide(n) {
+  document.getElementById(`slide${currentSlide}`).classList.remove('active');
+  document.getElementById(`slide${n}`).classList.add('active');
+  currentSlide = n;
+}
+
+function moveButton() {
+  const btn = document.getElementById('noBtn');
+  btn.style.position = 'absolute';
+  btn.style.top = Math.random() * 80 + 'vh';
+  btn.style.left = Math.random() * 80 + 'vw';
+}
+
+function confirmNo() {
+  if (confirm('You sure about that? 😏')) {
+    if (confirm('Hmm... try again 😏')) {
+      nextSlide('error404');
+    }
+  }
+}
+
+function restart() {
+  nextSlide(1);
+  setTimeout(() => nextSlide(2), 2000);
+}
+
+function endConfession() {
+  const message = document.createElement('div');
+  message.innerHTML = '💌 Aww 🥹 Thank you for watching this! You’re amazing! 💖';
+  message.style.position = 'fixed';
+  message.style.top = '40%';
+  message.style.left = '50%';
+  message.style.transform = 'translate(-50%, -50%)';
+  message.style.background = 'rgba(255, 154, 203, 0.9)';
+  message.style.padding = '20px 30px';
+  message.style.borderRadius = '20px';
+  message.style.fontSize = '1.2rem';
+  message.style.color = 'white';
+  message.style.textAlign = 'center';
+  message.style.zIndex = '1000';
+  document.body.appendChild(message);
+  setTimeout(() => message.remove(), 4000);
+}
+
+setTimeout(() => nextSlide(2), 2000);
+
+function createHearts() {
+  const heart = document.createElement('div');
+  heart.classList.add('floating-heart');
+  heart.innerText = '💗';
+  heart.style.left = Math.random() * 100 + 'vw';
+  heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 4000);
+}
+setInterval(createHearts, 500);
+</script>
+
+</body>
+</html>
